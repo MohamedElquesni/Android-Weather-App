@@ -3,6 +3,10 @@ package com.example.weatherapp.data.repository
 import com.example.weatherapp.data.api.WeatherApiService
 import com.example.weatherapp.data.model.WeatherResponse
 
+/**
+ * I decided that it is more obvious to handle errors at the view model layer.
+ * If there is error, view model turns the ui state into error
+ */
 class WeatherRepository(
     private val api: WeatherApiService
 ) {
