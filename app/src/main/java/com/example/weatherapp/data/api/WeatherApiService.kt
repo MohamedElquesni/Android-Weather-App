@@ -6,13 +6,16 @@ import retrofit2.http.Query
 
 interface WeatherApiService {
 
-    // TODO: Implement the GET request
-    // Endpoint: forecast
-    // Query parameters: latitude, longitude, daily, hourly, current, timezone, forecast_hours
-    // Return type: WeatherResponse
+    @GET("v1/forecast")
+    suspend fun getForecast(
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
 
-    @GET("forecast")
-    suspend fun getWeather(
-        // TODO: Add @Query parameters
+        @Query("daily") daily: String,
+        @Query("hourly") hourly: String,
+        @Query("current") current: String,
+
+        @Query("timezone") timezone: String = "auto",
+        @Query("forecast_hours") forecastHours: Int = 1
     ): WeatherResponse
 }
