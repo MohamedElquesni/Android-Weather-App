@@ -6,9 +6,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    // TODO: Create a lazy-initialized Retrofit instance
-    // Use Constants.BASE_URL
-    // Add GsonConverterFactory
+    private val retrofit =
+        Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-    // TODO: Create the WeatherApiService instance
+    val weatherApi = retrofit.create(WeatherApiService::class.java)
+
 }
