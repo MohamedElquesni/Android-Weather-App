@@ -1,17 +1,29 @@
 package com.example.weatherapp.data.repository
 
-import com.example.weatherapp.data.api.RetrofitClient
+import com.example.weatherapp.data.api.WeatherApiService
 import com.example.weatherapp.data.model.WeatherResponse
-import com.example.weatherapp.util.Constants
 
-class WeatherRepository {
+class WeatherRepository(
+    private val api: WeatherApiService
+) {
 
-    // TODO: Get the API service from RetrofitClient
-
-    // TODO: Implement this function to fetch weather data
-    // Use Constants.LATITUDE and Constants.LONGITUDE
-    // Handle exceptions and return Result<WeatherResponse>
-    suspend fun getWeather(): Result<WeatherResponse> {
-        TODO("Implement weather fetching")
+    suspend fun getWeather(
+        latitude: Double,
+        longitude: Double,
+        daily: String,
+        hourly: String,
+        current: String,
+        timezone: String,
+        forecastHours: Int
+    ): WeatherResponse {
+        return api.getForecast(
+            latitude = latitude,
+            longitude = longitude,
+            daily = daily,
+            hourly = hourly,
+            current = current,
+            timezone = timezone,
+            forecastHours = forecastHours
+        )
     }
 }
