@@ -14,32 +14,32 @@ val Urbanist = FontFamily(
     Font(R.font.urbanist_semibold, FontWeight.SemiBold)
 )
 
-val Typography = Typography(
-    // 24°C
+val AppTypography = Typography(
+
     displayLarge = TextStyle(
         fontFamily = Urbanist,
         fontWeight = FontWeight.SemiBold,
         fontSize = 64.sp,
+        lineHeight = 64.sp,
         letterSpacing = 0.25.sp
     ),
 
-    // Today / Next 7 days
     titleLarge = TextStyle(
         fontFamily = Urbanist,
         fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
+        lineHeight = 20.sp,
         letterSpacing = 0.25.sp
     ),
 
-    // Card big value (13 KM/h)
     titleMedium = TextStyle(
         fontFamily = Urbanist,
         fontWeight = FontWeight.Medium,
         fontSize = 20.sp,
+        lineHeight = 20.sp,
         letterSpacing = 0.25.sp
     ),
 
-    // Baghdad / Partly cloudy / Max-Min / Hourly temp & time
     bodyLarge = TextStyle(
         fontFamily = Urbanist,
         fontWeight = FontWeight.Medium,
@@ -48,27 +48,27 @@ val Typography = Typography(
         letterSpacing = 0.25.sp
     ),
 
-    // Monday
     bodyMedium = TextStyle(
         fontFamily = Urbanist,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
+        lineHeight = 16.sp,
         letterSpacing = 0.25.sp
     ),
 
-    // Wind / Humidity labels
     labelLarge = TextStyle(
         fontFamily = Urbanist,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
+        lineHeight = 14.sp,
         letterSpacing = 0.25.sp
     ),
 
-    // Degrees in next 7 days
     labelMedium = TextStyle(
         fontFamily = Urbanist,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
+        lineHeight = 14.sp,
         letterSpacing = 0.25.sp
     )
 )

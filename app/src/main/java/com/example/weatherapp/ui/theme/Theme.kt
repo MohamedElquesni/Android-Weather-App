@@ -11,26 +11,51 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
+
+    // Full screen background (behind everything)
     background = NightBlack,
     onBackground = PureWhite,
 
+    // Main surfaces (text sits on this)
     surface = NightBlack,
-    onSurface = SkyBlue,
 
+    // Primary content text (main temperature, section titles)
+    onSurface = PureWhite,
+
+    // Secondary / muted surfaces (chips, cards if reused)
     surfaceVariant = NightBlack,
-    onSurfaceVariant = PureWhite,
+
+    // Secondary / muted text (location, labels, metadata)
+    onSurfaceVariant = GrayShade,
+
+    // Accent color (icons, highlights, weather symbols)
+    primary = SkyBlue,
+    onPrimary = NightBlack
 )
 
 private val LightColorScheme = lightColorScheme(
+
+    // Full screen background (top sky area)
     background = SkyBlue,
     onBackground = NightBlack,
 
+    // Main surfaces (cards, lists)
     surface = PureWhite,
-    onSurface = SkyBlue,
 
+    // Primary content text (main temperature, section titles)
+    onSurface = NightBlack,
+
+    // Secondary / muted surfaces (chips, cards if reused)
     surfaceVariant = PureWhite,
-    onSurfaceVariant = NightBlack,
+
+    // Secondary / muted text (location, labels, metadata)
+    onSurfaceVariant = GrayShade,
+
+    // Accent color (icons, highlights, weather symbols)
+    primary = SkyBlue,
+    onPrimary = NightBlack
 )
+
 
 
 @Composable
@@ -52,7 +77,7 @@ fun WeatherAppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = AppTypography,
         content = content
     )
 }
