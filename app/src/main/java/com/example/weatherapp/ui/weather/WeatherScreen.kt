@@ -11,10 +11,15 @@ fun WeatherScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    // TODO: Implement UI based on state
-    // when (uiState) {
-    //     is WeatherUiState.Loading -> { /* Show loading */ }
-    //     is WeatherUiState.Success -> { /* Show weather data */ }
-    //     is WeatherUiState.Error -> { /* Show error + retry button */ }
-    // }
+     when (uiState) {
+         is WeatherUiState.Loading -> {
+
+         }
+         is WeatherUiState.Success -> {
+
+         }
+         is WeatherUiState.Error -> {
+
+         }
+     }
 }
