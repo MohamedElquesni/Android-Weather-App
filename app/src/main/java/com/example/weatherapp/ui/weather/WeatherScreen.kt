@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.weatherapp.R
 import com.example.weatherapp.ui.weather.components.CollapsingHeader
 import com.example.weatherapp.ui.weather.components.CurrentDayForecast
@@ -29,7 +29,7 @@ import com.example.weatherapp.ui.weather.components.NextDaysSection
 
 @Composable
 fun WeatherScreen(
-    viewModel: WeatherViewModel = viewModel(factory = WeatherViewModel.Factory)
+    viewModel: WeatherViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 

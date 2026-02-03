@@ -1,16 +1,17 @@
 package com.example.weatherapp.ui.weather
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.data.api.RetrofitClient
 import com.example.weatherapp.data.repository.WeatherRepository
 import com.example.weatherapp.util.Constants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherViewModel(
+@HiltViewModel
+class WeatherViewModel @Inject constructor(
     private val repository: WeatherRepository
 ) : ViewModel() {
 
@@ -32,17 +33,6 @@ class WeatherViewModel(
                 _uiState.value = WeatherUiState.Success(data)
             } catch (e: Exception) {
                 _uiState.value = WeatherUiState.Error(e.message ?: "Failed to load weather")
-            }
-        }
-    }
-
-    companion object {
-        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return WeatherViewModel(
-                    WeatherRepository(RetrofitClient.weatherApi)
-                ) as T
             }
         }
     }
