@@ -3,31 +3,30 @@ package com.example.weatherapp.data.model
 import com.google.gson.annotations.SerializedName
 
 data class WeatherResponse(
-    val current: Current?,
     val hourly: Hourly?,
     val daily: Daily?
 )
 
-data class Current(
-    @SerializedName("temperature_2m")
-    val temperature2m: Double?,
-    @SerializedName("apparent_temperature")
-    val apparentTemperature: Double?,
-    @SerializedName("is_day")
-    val isDay: Int?,
-    @SerializedName("wind_speed_10m")
-    val windSpeed10m: Double?,
-    @SerializedName("relative_humidity_2m")
-    val relativeHumidity2m: Int?,
-    val rain: Double?,
-    val precipitation: Double?,
-    @SerializedName("pressure_msl")
-    val pressureMsl: Double?
-)
-
 data class Hourly(
+    val time: List<String>?,
+    @SerializedName("temperature_2m")
+    val temperature2m: List<Double>?,
+    @SerializedName("relative_humidity_2m")
+    val relativeHumidity2m: List<Int>?,
+    @SerializedName("apparent_temperature")
+    val apparentTemperature: List<Double>?,
+    @SerializedName("wind_speed_10m")
+    val windSpeed10m: List<Double>?,
+    @SerializedName("weather_code")
+    val weatherCode: List<Int>?,
+    @SerializedName("pressure_msl")
+    val pressureMsl: List<Double>?,
     @SerializedName("uv_index")
-    val uvIndex: List<Double>?
+    val uvIndex: List<Double>?,
+    @SerializedName("precipitation_probability")
+    val precipitationProbability: List<Double>,
+    @SerializedName("is_day")
+    val isDay: List<Int>?
 )
 
 data class Daily(
