@@ -1,82 +1,45 @@
 package com.example.weatherapp.ui.theme
 
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
+
+// Alpha variants
+val ColorScheme.onBackgroundHigh: Color
+    get() = onBackground.copy(alpha = 0.87f)
+
+val ColorScheme.onBackgroundMedium: Color
+    get() = onBackground.copy(alpha = 0.6f)
 
 private val DarkColorScheme = darkColorScheme(
-
-    // Full screen background (behind everything)
-    background = NightBlack,
-    onBackground = PureWhite,
-
-    // Main surfaces (text sits on this)
-    surface = NightBlack,
-
-    // Primary content text (main temperature, section titles)
-    onSurface = PureWhite,
-
-    // Secondary / muted surfaces (chips, cards if reused)
-    surfaceVariant = NightBlack,
-
-    // Secondary / muted text (location, labels, metadata)
-    onSurfaceVariant = GrayShade,
-
-    // Accent color (icons, highlights, weather symbols)
-    primary = SkyBlue,
-    onPrimary = NightBlack
+    primary = SkyBlue,                    // constant blue (today's stats)
+    onBackground = PureWhite,             // main text
+    onSurfaceVariant = PureWhite,         // location text
+    surface = NightBlack,                 // card color
+    background = NightBlack,              // gradient top
+    surfaceVariant = DarkGray             // gradient bottom
 )
 
 private val LightColorScheme = lightColorScheme(
-
-    // Full screen background (top sky area)
-    background = SkyBlue,
-    onBackground = NightBlack,
-
-    // Main surfaces (cards, lists)
-    surface = PureWhite,
-
-    // Primary content text (main temperature, section titles)
-    onSurface = NightBlack,
-
-    // Secondary / muted surfaces (chips, cards if reused)
-    surfaceVariant = PureWhite,
-
-    // Secondary / muted text (location, labels, metadata)
-    onSurfaceVariant = GrayShade,
-
-    // Accent color (icons, highlights, weather symbols)
-    primary = SkyBlue,
-    onPrimary = NightBlack
+    primary = SkyBlue,                    // constant blue (today's stats)
+    onBackground = NightBlack,            // main text
+    onSurfaceVariant = GrayShade,         // location text
+    surface = PureWhite,                  // card color
+    background = SkyBlue,                 // gradient top
+    surfaceVariant = PureWhite            // gradient bottom
 )
-
-
 
 @Composable
 fun WeatherAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
         typography = AppTypography,
         content = content
     )
