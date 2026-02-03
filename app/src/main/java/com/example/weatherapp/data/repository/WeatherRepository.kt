@@ -24,7 +24,7 @@ class WeatherRepository(
             daily = "temperature_2m_max,temperature_2m_min,weather_code",
             hourly = "temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code,pressure_msl,uv_index,is_day,precipitation_probability",
             timezone = "auto",
-            forecastHours = 1
+            forecastHours = 24
         )
     }
 }
