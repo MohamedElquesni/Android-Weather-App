@@ -1,5 +1,8 @@
 package com.example.weatherapp.ui.weather
 
+import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +14,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -33,8 +37,32 @@ fun WeatherScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val fineLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
+        val coarseLocationGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        viewModel.onPermissionResult(fineLocationGranted || coarseLocationGranted)
+    }
+
     when (uiState) {
         is WeatherUiState.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+        is WeatherUiState.RequestingPermission -> {
+            LaunchedEffect(Unit) {
+                permissionLauncher.launch(
+                    arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    )
+                )
+            }
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -70,6 +98,7 @@ fun WeatherSuccessContent(state: WeatherUiState.Success) {
     val weatherData = state.data
     val hourly = weatherData.hourly
     val daily = weatherData.daily
+    val locationName = state.locationName ?: stringResource(R.string.location_cairo)
 
     val listState = rememberLazyListState()
 
@@ -105,7 +134,7 @@ fun WeatherSuccessContent(state: WeatherUiState.Success) {
             if (hourly != null && daily != null) {
                 item {
                     CollapsingHeader(
-                        locationName = stringResource(R.string.location_cairo),
+                        locationName = locationName,
                         hourly = hourly,
                         daily = daily,
                         collapseFraction = collapseFraction
