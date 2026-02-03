@@ -17,23 +17,14 @@ class WeatherRepository(
     private val api: WeatherApiService
 ) {
 
-    suspend fun getWeather(
-        latitude: Double,
-        longitude: Double,
-        daily: String,
-        hourly: String,
-        current: String,
-        timezone: String,
-        forecastHours: Int
-    ): WeatherResponse {
+    suspend fun getWeather(latitude: Double, longitude: Double): WeatherResponse {
         return api.getForecast(
             latitude = latitude,
             longitude = longitude,
-            daily = daily,
-            hourly = hourly,
-            current = current,
-            timezone = timezone,
-            forecastHours = forecastHours
+            daily = "temperature_2m_max,temperature_2m_min,weather_code",
+            hourly = "temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code,pressure_msl,uv_index,is_day,precipitation_probability",
+            timezone = "auto",
+            forecastHours = 1
         )
     }
 }

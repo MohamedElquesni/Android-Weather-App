@@ -13,7 +13,6 @@ interface WeatherApiService {
 
         @Query("daily") daily: String,
         @Query("hourly") hourly: String,
-        @Query("current") current: String,
 
         @Query("timezone") timezone: String = "auto",
         @Query("forecast_hours") forecastHours: Int = 1

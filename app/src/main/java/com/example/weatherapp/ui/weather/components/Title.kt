@@ -15,6 +15,7 @@ import com.example.weatherapp.R
 
 @Composable
 fun Title(
+    locationName: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -28,18 +29,19 @@ fun Title(
         )
 
         Text(
-            text = "Cairo",
+            text = locationName,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }
 
-@Preview(showBackground = true, name = "Title")
+@Preview(showBackground = true, name = "Title",)
 @Composable
 fun TitlePreview() {
     Title(
-        Modifier.size(width = 94.dp, height = 24.dp)
+        locationName = "Cairo",
+        modifier = Modifier.size(width = 94.dp, height = 24.dp)
     )
 }
 

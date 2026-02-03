@@ -27,12 +27,7 @@ class WeatherViewModel(
             try {
                 val data = repository.getWeather(
                     latitude = Constants.LATITUDE,
-                    longitude = Constants.LONGITUDE,
-                    daily = "weather_code,temperature_2m_max,temperature_2m_min",
-                    hourly = "uv_index",
-                    current = "temperature_2m,is_day,wind_speed_10m,relative_humidity_2m,rain,pressure_msl,precipitation,apparent_temperature",
-                    timezone = "auto",
-                    forecastHours = 1
+                    longitude = Constants.LONGITUDE
                 )
                 _uiState.value = WeatherUiState.Success(data)
             } catch (e: Exception) {
