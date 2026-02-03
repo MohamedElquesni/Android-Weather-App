@@ -3,6 +3,7 @@ package com.example.weatherapp.ui.weather.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,10 +20,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.Hourly
 import com.example.weatherapp.ui.theme.onBackgroundHigh
 import com.example.weatherapp.ui.theme.onBackgroundMedium
+import com.example.weatherapp.util.formatNumber
 
 @Composable
 fun CurrentDayForecast(
@@ -31,7 +34,7 @@ fun CurrentDayForecast(
 ) {
     val wind = hourly.windSpeed10m?.firstOrNull() ?: 0.0
     val humidity = hourly.relativeHumidity2m?.firstOrNull() ?: 0
-    val rainChance = hourly.precipitationProbability?.firstOrNull() ?: 0
+    val rainChance: Int = (hourly.precipitationProbability.firstOrNull() ?: 0.0).toInt()
     val uvIndex = hourly.uvIndex?.firstOrNull() ?: 0.0
     val pressure = hourly.pressureMsl?.firstOrNull() ?: 0.0
     val feelsLike = hourly.apparentTemperature?.firstOrNull() ?: 0.0
@@ -46,20 +49,20 @@ fun CurrentDayForecast(
         ) {
             StatCard(
                 icon = R.drawable.ic_wind,
-                value = "${wind.toInt()} km/h",
-                label = "Wind",
+                value = "${formatNumber(wind.toInt())} ${stringResource(R.string.unit_kmh)}",
+                label = stringResource(R.string.wind),
                 modifier = Modifier.weight(1f)
             )
             StatCard(
                 icon = R.drawable.ic_humidity,
-                value = "$humidity%",
-                label = "Humidity",
+                value = "${formatNumber(humidity)}${stringResource(R.string.unit_percent)}",
+                label = stringResource(R.string.humidity),
                 modifier = Modifier.weight(1f)
             )
             StatCard(
                 icon = R.drawable.ic_rain,
-                value = "$rainChance%",
-                label = "Rain",
+                value = "${formatNumber(rainChance)}${stringResource(R.string.unit_percent)}",
+                label = stringResource(R.string.rain),
                 modifier = Modifier.weight(1f)
             )
         }
@@ -70,20 +73,20 @@ fun CurrentDayForecast(
         ) {
             StatCard(
                 icon = R.drawable.ic_uv,
-                value = "${uvIndex.toInt()}",
-                label = "UV Index",
+                value = formatNumber(uvIndex.toInt()),
+                label = stringResource(R.string.uv_index),
                 modifier = Modifier.weight(1f)
             )
             StatCard(
                 icon = R.drawable.ic_pressure,
-                value = "${pressure.toInt()} hPa",
-                label = "Pressure",
+                value = "${formatNumber(pressure.toInt())} ${stringResource(R.string.unit_hpa)}",
+                label = stringResource(R.string.pressure),
                 modifier = Modifier.weight(1f)
             )
             StatCard(
                 icon = R.drawable.ic_temperature,
-                value = "${feelsLike.toInt()}°C",
-                label = "Feels Like",
+                value = "${formatNumber(feelsLike.toInt())}${stringResource(R.string.unit_celsius)}",
+                label = stringResource(R.string.feels_like),
                 modifier = Modifier.weight(1f)
             )
         }
@@ -120,9 +123,15 @@ fun StatCard(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.08f),
+                shape = RoundedCornerShape(24.dp)
+            )
+            .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.7f))
             .padding(vertical = 16.dp)
+
     ) {
         Image(
             painter = painterResource(icon),
@@ -155,6 +164,6 @@ private fun StatCardPreview() {
     StatCard(
         icon = R.drawable.ic_wind,
         value = "13 km/h",
-        label = "Wind"
+        label = stringResource(R.string.wind)
     )
 }

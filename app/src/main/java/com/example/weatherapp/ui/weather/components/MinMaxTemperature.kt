@@ -18,8 +18,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.example.weatherapp.R
 import com.example.weatherapp.ui.theme.onBackgroundMedium
+import com.example.weatherapp.util.formatNumber
 
 @Composable
 fun MinMaxTemperature(
@@ -34,12 +36,12 @@ fun MinMaxTemperature(
     ) {
         Image(
             painter = painterResource(R.drawable.ic_arrow_up),
-            contentDescription = "Max temperature",
+            contentDescription = stringResource(R.string.max_temperature),
             modifier = Modifier.size(12.dp),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackgroundMedium)
         )
         Text(
-            text = "${maxTemp}°C",
+            text = "${formatNumber(maxTemp)}${stringResource(R.string.unit_celsius)}",
             color = MaterialTheme.colorScheme.onBackgroundMedium,
             style = MaterialTheme.typography.bodyMedium
         )
@@ -52,13 +54,13 @@ fun MinMaxTemperature(
 
         Image(
             painter = painterResource(R.drawable.ic_arrow_down),
-            contentDescription = "Min temperature",
+            contentDescription = stringResource(R.string.min_temperature),
             modifier = Modifier.size(12.dp),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackgroundMedium)
         )
 
         Text(
-            text = "${minTemp}°C",
+            text = "${formatNumber(minTemp)}${stringResource(R.string.unit_celsius)}",
             color = MaterialTheme.colorScheme.onBackgroundMedium,
             style = MaterialTheme.typography.bodyMedium
         )

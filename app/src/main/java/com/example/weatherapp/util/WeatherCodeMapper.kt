@@ -1,39 +1,43 @@
 package com.example.weatherapp.util
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import com.example.weatherapp.R
 
+@Composable
 fun getWeatherDescription(weatherCode: Int): String {
     return when (weatherCode) {
-        0 -> "Clear Sky"
-        1 -> "Mainly Clear"
-        2 -> "Partly Cloudy"
-        3 -> "Overcast"
-        45 -> "Fog"
-        48 -> "Depositing Rime Fog"
-        51 -> "Light Drizzle"
-        53 -> "Moderate Drizzle"
-        55 -> "Dense Drizzle"
-        56 -> "Light Freezing Drizzle"
-        57 -> "Dense Freezing Drizzle"
-        61 -> "Slight Rain"
-        63 -> "Moderate Rain"
-        65 -> "Heavy Rain"
-        66 -> "Light Freezing Rain"
-        67 -> "Heavy Freezing Rain"
-        71 -> "Slight Snow Fall"
-        73 -> "Moderate Snow Fall"
-        75 -> "Heavy Snow Fall"
-        77 -> "Snow Grains"
-        80 -> "Slight Rain Showers"
-        81 -> "Moderate Rain Showers"
-        82 -> "Violent Rain Showers"
-        85 -> "Slight Snow Showers"
-        86 -> "Heavy Snow Showers"
-        95 -> "Thunderstorm"
-        96 -> "Thunderstorm with Slight Hail"
-        99 -> "Thunderstorm with Heavy Hail"
-        else -> "Unknown"
+        0 -> stringResource(R.string.weather_clear_sky)
+        1 -> stringResource(R.string.weather_mainly_clear)
+        2 -> stringResource(R.string.weather_partly_cloudy)
+        3 -> stringResource(R.string.weather_overcast)
+        45 -> stringResource(R.string.weather_fog)
+        48 -> stringResource(R.string.weather_depositing_rime_fog)
+        51 -> stringResource(R.string.weather_light_drizzle)
+        53 -> stringResource(R.string.weather_moderate_drizzle)
+        55 -> stringResource(R.string.weather_dense_drizzle)
+        56 -> stringResource(R.string.weather_light_freezing_drizzle)
+        57 -> stringResource(R.string.weather_dense_freezing_drizzle)
+        61 -> stringResource(R.string.weather_slight_rain)
+        63 -> stringResource(R.string.weather_moderate_rain)
+        65 -> stringResource(R.string.weather_heavy_rain)
+        66 -> stringResource(R.string.weather_light_freezing_rain)
+        67 -> stringResource(R.string.weather_heavy_freezing_rain)
+        71 -> stringResource(R.string.weather_slight_snow_fall)
+        73 -> stringResource(R.string.weather_moderate_snow_fall)
+        75 -> stringResource(R.string.weather_heavy_snow_fall)
+        77 -> stringResource(R.string.weather_snow_grains)
+        80 -> stringResource(R.string.weather_slight_rain_showers)
+        81 -> stringResource(R.string.weather_moderate_rain_showers)
+        82 -> stringResource(R.string.weather_violent_rain_showers)
+        85 -> stringResource(R.string.weather_slight_snow_showers)
+        86 -> stringResource(R.string.weather_heavy_snow_showers)
+        95 -> stringResource(R.string.weather_thunderstorm)
+        96 -> stringResource(R.string.weather_thunderstorm_slight_hail)
+        99 -> stringResource(R.string.weather_thunderstorm_heavy_hail)
+        else -> stringResource(R.string.weather_unknown)
     }
 }
 
