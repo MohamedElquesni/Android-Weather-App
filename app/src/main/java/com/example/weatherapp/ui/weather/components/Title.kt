@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.example.weatherapp.R
 
 @Composable
@@ -25,7 +26,7 @@ fun Title(
         Icon(
             painter = painterResource(R.drawable.ic_location),
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            contentDescription = "Location"
+            contentDescription = stringResource(R.string.location)
         )
 
         Text(

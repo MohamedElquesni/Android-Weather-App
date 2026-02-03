@@ -21,10 +21,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
+import androidx.compose.ui.res.stringResource
+import com.example.weatherapp.R
 import com.example.weatherapp.data.model.Daily
 import com.example.weatherapp.data.model.Hourly
 import com.example.weatherapp.ui.theme.onBackgroundMedium
 import com.example.weatherapp.util.getWeatherDescription
+import com.example.weatherapp.util.formatNumber
 
 @Composable
 fun CollapsingHeader(
@@ -39,19 +42,16 @@ fun CollapsingHeader(
     val iconWidth = lerp(220.dp, 124.dp, collapseFraction)
     val iconHeight = lerp(200.dp, 112.dp, collapseFraction)
 
-    Box(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Title(locationName = locationName)
 
-        // Expanded layout
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .alpha(1f - collapseFraction),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Title(locationName = locationName)
+        Spacer(modifier = Modifier.height(12.dp))
 
-            Spacer(modifier = Modifier.height(12.dp))
-
+        if (collapseFraction < 0.5f) {
+            // Expanded layout - vertical
             WeatherIcon(
                 weatherCode = weatherCode,
                 modifier = Modifier.size(iconWidth, iconHeight)
@@ -59,23 +59,29 @@ fun CollapsingHeader(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            TemperatureInfo(hourly = hourly, daily = daily, modifier.size(height = 143.dp, width = 168.dp))
-        }
-
-        // Collapsed layout
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .alpha(collapseFraction),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            WeatherIcon(
-                weatherCode = weatherCode,
-                modifier = Modifier.size(iconWidth, iconHeight)
+            TemperatureInfo(
+                hourly = hourly,
+                daily = daily,
+                modifier = Modifier.size(height = 143.dp, width = 168.dp)
             )
+        } else {
+            // Collapsed layout - horizontal
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                WeatherIcon(
+                    weatherCode = weatherCode,
+                    modifier = Modifier.size(iconWidth, iconHeight)
+                )
 
-            TemperatureInfo(hourly = hourly, daily = daily, modifier.size(height = 143.dp, width = 168.dp))
+                TemperatureInfo(
+                    hourly = hourly,
+                    daily = daily,
+                    modifier = Modifier.size(height = 143.dp, width = 168.dp)
+                )
+            }
         }
     }
 }
@@ -150,7 +156,7 @@ fun TemperatureInfo(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "${temperature}°C",
+            text = "${formatNumber(temperature)}${stringResource(R.string.unit_celsius)}",
             color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.displayLarge
         )
