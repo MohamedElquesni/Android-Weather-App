@@ -146,7 +146,10 @@ fun WeatherSuccessContent(state: WeatherUiState.Success) {
                 }
 
                 item {
-                    HourlySection(hourly = hourly)
+                    HourlySection(
+                        hourly = hourly,
+                        parentEndPadding = 12.dp
+                    )
                 }
 
                 item {
