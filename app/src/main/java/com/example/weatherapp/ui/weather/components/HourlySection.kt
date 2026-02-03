@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -12,7 +11,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import com.example.weatherapp.R
@@ -24,11 +26,13 @@ import java.util.Locale
 @Composable
 fun HourlySection(
     hourly: Hourly,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    parentEndPadding: Dp = 12.dp
 ) {
     val times = hourly.time ?: emptyList()
     val temps = hourly.temperature2m ?: emptyList()
     val weatherCodes = hourly.weatherCode ?: emptyList()
+    val density = LocalDensity.current
 
     Column(
         modifier = modifier,
@@ -42,9 +46,18 @@ fun HourlySection(
 
         LazyRow(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .layout { measurable, constraints ->
+                    val extraWidth = with(density) { parentEndPadding.roundToPx() }
+                    val placeable = measurable.measure(
+                        constraints.copy(maxWidth = constraints.maxWidth + extraWidth)
+                    )
+                    layout(placeable.width, placeable.height) {
+                        placeable.place(0, 0)
+                    }
+                },
             horizontalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(start = 12.dp, end = 0.dp)
+            contentPadding = PaddingValues(end = parentEndPadding)
         ) {
             itemsIndexed(times) { index, time ->
                 val hour = formatHour(time)
