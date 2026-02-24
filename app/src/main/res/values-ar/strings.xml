@@ -42,9 +42,9 @@
     <string name="weather_thunderstorm_heavy_hail">عاصفة رعدية مع برد غزير</string>
     <string name="weather_unknown">غير معروف</string>
     <string name="location_cairo">القاهرة</string>
+    <string name="current_location">الموقع الحالي</string>
     <string name="unit_kmh">كم/س</string>
     <string name="unit_hpa">ه.ب</string>
     <string name="unit_percent">%</string>
     <string name="unit_celsius">°م</string>
 </resources>
-

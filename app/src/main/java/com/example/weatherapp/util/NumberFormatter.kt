@@ -8,7 +8,7 @@ fun formatNumber(number: Int): String {
     val formatted = NumberFormat.getIntegerInstance(locale).format(number)
     
     return if (locale.language == "ar") {
-        convertToArabicIndic(formatted)
+        formatted.convertToArabicIndic()
     } else {
         formatted
     }
@@ -21,14 +21,14 @@ fun formatNumber(number: Double): String {
     val formatted = numberFormat.format(number)
     
     return if (locale.language == "ar") {
-        convertToArabicIndic(formatted)
+        formatted.convertToArabicIndic()
     } else {
         formatted
     }
 }
 
-fun convertToArabicIndic(text: String): String {
-    return text.map { char ->
+fun String.convertToArabicIndic(): String {
+    return this.map { char ->
         when (char) {
             '0' -> '٠'
             '1' -> '١'
@@ -44,4 +44,3 @@ fun convertToArabicIndic(text: String): String {
         }
     }.joinToString("")
 }
-

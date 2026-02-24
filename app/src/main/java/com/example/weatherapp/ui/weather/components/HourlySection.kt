@@ -56,8 +56,7 @@ fun HourlySection(
                         placeable.place(0, 0)
                     }
                 },
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(end = parentEndPadding)
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             itemsIndexed(times) { index, time ->
                 val hour = formatHour(time)
@@ -80,14 +79,14 @@ private fun formatHour(timeString: String): String {
         val formatted = date?.let { outputFormat.format(it) } ?: timeString.substringAfter("T").substringBefore(":") + ":00"
         
         if (Locale.getDefault().language == "ar") {
-            convertToArabicIndic(formatted)
+            formatted.convertToArabicIndic()
         } else {
             formatted
         }
     } catch (e: Exception) {
         val fallback = timeString.substringAfter("T").substringBefore(":") + ":00"
         if (Locale.getDefault().language == "ar") {
-            convertToArabicIndic(fallback)
+            fallback.convertToArabicIndic()
         } else {
             fallback
         }
