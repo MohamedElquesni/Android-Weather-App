@@ -42,6 +42,7 @@
     <string name="weather_thunderstorm_heavy_hail">Thunderstorm with Heavy Hail</string>
     <string name="weather_unknown">Unknown</string>
     <string name="location_cairo">Cairo</string>
+    <string name="current_location">Current Location</string>
     <string name="unit_kmh">KM/h</string>
     <string name="unit_hpa">hPa</string>
     <string name="unit_percent">%</string>

@@ -98,7 +98,7 @@ fun WeatherSuccessContent(state: WeatherUiState.Success) {
     val weatherData = state.data
     val hourly = weatherData.hourly
     val daily = weatherData.daily
-    val locationName = state.locationName ?: stringResource(R.string.location_cairo)
+    val locationName = state.locationName ?: stringResource(R.string.current_location)
 
     val listState = rememberLazyListState()
 
@@ -159,10 +159,6 @@ fun WeatherSuccessContent(state: WeatherUiState.Success) {
         }
     }
 }
-
-
-
-
 
 
 
