@@ -42,4 +42,4 @@ Android weather app built with Jetpack Compose. Fetches live data from [Open-Met
 ## Requirements
 
 - Android 7.0+ (API 24)
-- Location permission (optional — falls back to current location label)
+- Location permission (optional, falls back to current location label)
